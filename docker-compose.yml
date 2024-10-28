@@ -13,11 +13,6 @@ services:
       MYSQL_ROOT_PASSWORD: abi
     volumes:
       - mysql_data:/var/lib/mysql
-    healthcheck:  # Add healthcheck to ensure service readiness
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 5    
   
   backend:
     build:
@@ -28,7 +23,7 @@ services:
     command: ["bash", "a.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
 
     volumes:
-      - .:/code  # Mounts current directory to /code for consistency
+      - .:/code 
     ports:
      - "8000:8000"
     environment:
