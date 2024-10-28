@@ -1,15 +1,13 @@
-from python:3.8.18
+FROM python:3.8.18
 
-ENV PYTHONUNBUFFERED 1
+WORKDIR /app
 
-RUN mkdir /code
+# Install netcat-openbsd (or netcat-traditional) and clean up
+RUN apt-get update && \
+    apt-get install -y netcat-openbsd && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-WORKDIR /code
-
-# RUN apt-get clean && apt-get vim -y && apt-get install default-libmyclient-dev -yy
-
-ADD requirements.txt /code/
+COPY . .
 
 RUN pip install --upgrade pip && pip install -r requirements.txt
-
-ADD . /code/
