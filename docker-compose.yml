@@ -20,7 +20,9 @@ services:
       dockerfile: Dockerfile
 
     working_dir: /code  # Match this with the Dockerfile WORKDIR
-    command: ["/bin/bash", "-c", "./a.sh && python manage.py runserver 0.0.0.0:8000"]
+   
+    command: ["/bin/bash", "-c", "./code/a.sh python manage.py runserver 0.0.0.0:8000"]
+
 
     volumes:
       - .:/code 
